@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!--  USED FOR GIVING COMMMENTS.HERE WE ARE TAKING  CONSTRUCTOR AND GETTER AND SETTER METHOD AND DEFINNING THEM IN BEANS            -->
+
+<bean id="address" class="demo.Address">
+
+
+<constructor-arg name ="addressLine1" value="snp"/>
+<constructor-arg name ="addressLine2" value="rtk"/>
+<constructor-arg name ="addressLine3" value="ggn"/>
+</bean>
+
+<bean id="emp" class="demo.Employee">
+
+<constructor-arg name ="employeeid" value="101"/>
+<constructor-arg name ="firstName" value ="rahul"/>
+<constructor-arg name ="lastName" value= "jindal"/>
+<constructor-arg name ="address" ref ="address"/>
+
+
+</bean>
+
+
+
+
+</beans>
