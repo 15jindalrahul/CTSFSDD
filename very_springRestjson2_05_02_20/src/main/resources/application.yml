@@ -1,0 +1,8 @@
+ 
+spring:
+  application:
+    name: spring-jpa  datasource:    url: jdbc:mysql://localhost:3306/hibernate 
+    username: root
+    password: welcome 
+    
+# here we can use h2 as well as mySQL,but in this we are using mySql    

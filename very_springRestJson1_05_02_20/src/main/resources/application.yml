@@ -1,0 +1,7 @@
+spring:
+  application:
+   name: spring-jpa
+   h2:      console:
+       path: /console      settings:         web-allow-others: true
+         trace: true 
+ 
