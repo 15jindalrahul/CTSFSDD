@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+ 
+if(typeof(localStorage)!=null)
+{
+     localStorage.getItem("rahul");
+
+
+    /* we can get the values by this method also  */
+    localStorage.firstName("rahul");
+
+     
+    
+
+
+
+
+    /*  method to find  */
+    document.getElementById("name").innerHTML=localStorage.firstName;
+}
+else{
+    console.log("not supported");
+}
+
+
+    </script>
+</body>
+</html>
