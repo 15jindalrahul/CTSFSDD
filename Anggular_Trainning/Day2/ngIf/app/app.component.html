@@ -1,0 +1,29 @@
+<h1 *ngIf="hasError"> some heading</h1>
+<h1 *ngIf="!hasError"> some heading 2</h1>
+
+
+
+<h1 *ngIf="hasError; else:elseBlock; then: ifBlock"></h1>
+
+<ng-template #ifBlock>
+  <h1> hello from another if</h1>
+</ng-template>
+
+
+<ng-template #elseBlock>
+  <h1> hello from another else </h1>
+</ng-template>
+
+<!--  real time application of if else statement in angular -->
+<button *ngIf="!isLogged" class="btn btn-primary">LogIn</button>
+<button *ngIf="isLogged" class="btn btn-primary">LogOut</button>
+
+
+
+<div [ngSwitch]="number">
+
+
+  <h1 *ngSwitchCase="'one'"> 1</h1>
+  <h1 *ngSwitchCase="'two'">2</h1>
+  <h1 *ngSwitchDefault>Not present</h1>
+</div>
