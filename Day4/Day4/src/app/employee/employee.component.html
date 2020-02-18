@@ -1,0 +1,21 @@
+
+<body>
+    <h1>employee</h1>
+    <table class="table table-dark striped">
+        <thead>
+            <th>s.no</th>
+            <th>Name</th>
+            <th>gender</th>
+            <th>salary</th>
+            
+        </thead>
+        <tbody>
+            <tr *ngFor="let employee of employees">
+                <td>{{employee.empId}}</td>
+                <td>{{employee.name | titlecase  }}</td>
+                <td>{{employee.gender|uppercase}}</td>
+                <td>{{employee.salary|currency:'INR'}}</td>
+            </tr>
+        </tbody>
+    </table> 
+

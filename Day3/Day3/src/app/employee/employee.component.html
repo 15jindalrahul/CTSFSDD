@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<body>
+    
+
+
+<h1>{{name | uppercase}}</h1>
+<h1>{{name |lowercase}}</h1>
+<h1>{{name |titlecase}}</h1>
+
+
+<h1>{{.25 | percent}}</h1>
+<h1>{{100 |currency}}</h1>
+<h1>{{100|currency:'INR'}}</h1>
+<h1>{{100|currency:'INR':'code'}}</h1>
+<h1>{{100.00|currency:'GBP'}}</h1>
+<br>
+<h1>{{currentDate}}</h1>
+<h1>{{currentDate | date:'shortDate'}}</h1>
+<h1>{{currentDate |date:'longDate'}}</h1><!--  further if u want more format of date go to anhular.io -->
+
+<h1>{{123|number :'3.1-5'}}</h1>
+
+
+<h1>employee list</h1>
+<table class="table striped">
+    <thead>
+        <th>s.no</th>
+        <th>Name</th>
+        <th>gender</th>
+        <th>salary</th>
+        
+    </thead>
+    <tbody>
+        <tr *ngFor="let employee of employees">
+            <td>{{employee.empId}}</td>
+            <td>{{employee.name | titlecase | title:employee.gender}}</td><!--custom pipe with name=title -->
+            <td>{{employee.gender|uppercase}}</td>
+            <td>{{employee.salary|currency:'INR'}}</td>
+        </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

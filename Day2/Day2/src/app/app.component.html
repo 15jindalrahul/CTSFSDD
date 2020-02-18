@@ -1,0 +1,64 @@
+<h1 *ngIf="hasError"> some heading</h1>
+<h1 *ngIf="!hasError"> some heading 2</h1>
+
+
+
+<h1 *ngIf="hasError; else:elseBlock; then: ifBlock"></h1>
+
+<ng-template #ifBlock>
+  <h1> hello from another if</h1>
+</ng-template>
+
+
+<ng-template #elseBlock>
+  <h1> hello from another else </h1>
+</ng-template>
+
+<!--  real time application of if else statement in angular -->
+<button *ngIf="!isLogged" class="btn btn-primary">LogIn</button>
+<button *ngIf="isLogged" class="btn btn-primary">LogOut</button>
+
+
+
+<div [ngSwitch]="number">
+
+
+  <h1 *ngSwitchCase="'one'"> 1</h1>
+  <h1 *ngSwitchCase="'two'">2</h1>
+  <h1 *ngSwitchDefault>Not present</h1>
+</div>
+
+<ul *ngFor="let n of names">
+  
+  <li>{{names}}</li>
+ 
+</ul>
+
+<div class="container">
+<table class="table table-bordered table-striped">
+  
+    <thead>
+      <tr>
+        <th>index</th>
+        <th>s.no</th>
+        <th>Name</th>
+        <th>Age</th>
+        <th>delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let employee of employees;trackBy:trackByEmpId; as i;odd as o;even as e;first as f;last as l">
+
+        <td>{{employee.empId}}</td>
+        <td>{{employee.empName}}</td>
+        <td>{{employee.age}}</td>
+        <button class="btn btn-primary" (click)="onDelete(employee)">delete</button>
+      </tr>
+    </tbody>
+
+  
+</table>
+<button class=" btn btn-primary" (click)="onButtonClicked()">Refresh data</button>
+
+
+</div>
