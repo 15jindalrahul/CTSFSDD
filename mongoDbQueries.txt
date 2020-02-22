@@ -1,0 +1,293 @@
+
+                                                        Database
+                                 MongodB   (in mongoDb we call tables as collections)
+
+>show dbs
+>show collections                             (for showing table)
+>db.createCollections("employees")            (for creating tables)
+>db.users.drop()                             (for deleting a table where users is a table name)
+>db.dropDatabase()                           (for droping a database)
+>db.users.find()                               (for finding data inside table)
+
+>db.users.find({'name':'mark'})               (for finding particular value in table like find names  starting with mark)
+>db.users.count()                              (for total no of rows)
+
+
+Capped collections in MongoDB(Once we created capped collection ,we cannot uncapped it.By Capped it means definning size that no of rows should be fixed,space should be fixed)
+>db.createCollection("users",{capped:true,size:1000,max:1000}
+
+
+>db.users.insertOne({'name':'mark'})                             (for inserting one value only)
+>db.users.insertMany([{'name':'mark'},{'name':'watson'}])         (for inserting one value only)
+>db.users.save({'name':'z'})                                       (it can be used for creating like insert)
+db.users.save({_id:1,name:'x'})                                  (here it can be used for update also
+
+ Embedded Collection in  MongoDb
+
+
+db.users.insert(
+{
+"name":"jindal",
+address:{
+"H.no":"111",
+"phoneNo":"9999999",
+"country":"usa"
+}
+}
+)
+
+
+
+                                 Installations
+
+
+
+1                    C:\Program Files\MongoDB\Server\4.2\bin
+2                    then on Command Prompt write  >mongod
+3                    At Local disk create folder with name data
+4                    then within data folder ,create another folder name db
+5                     C:\Program Files\MongoDB\Server\4.2\bin
+6                       then on Command Prompt write  >mongo 
+
+
+
+
+
+
+
+
+
+                                          Command Prompt
+
+
+
+
+
+
+
+Microsoft Windows [Version 10.0.17134.1184]
+(c) 2018 Microsoft Corporation. All rights reserved.
+
+C:\Users\Alchemy>mongo
+MongoDB shell version v4.2.3
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("8899d25f-ebc7-4fff-998a-cc72cb0c8485") }
+MongoDB server version: 4.2.3
+Server has startup warnings:
+2020-02-10T00:49:27.035-0800 I  CONTROL  [initandlisten]
+2020-02-10T00:49:27.036-0800 I  CONTROL  [initandlisten] ** WARNING: Access control is not enabled for the database.
+2020-02-10T00:49:27.036-0800 I  CONTROL  [initandlisten] **          Read and write access to data and configuration is unrestricted.
+2020-02-10T00:49:27.073-0800 I  CONTROL  [initandlisten]
+---
+
+> show dbs
+admin   0.000GB
+config  0.000GB
+items   0.000GB
+local   0.000GB
+> use demo
+switched to db demo
+> show collections
+
+> db.createCollection("employees")
+{ "ok" : 1 }
+> show collections
+employees
+> db.createCollection("users")
+{ "ok" : 1 }
+> db.users.insert({'name':'mark'})
+WriteResult({ "nInserted" : 1 })
+> db.user.insert({'name':'rahul'})
+WriteResult({ "nInserted" : 1 })
+> show dbs
+admin   0.000GB
+config  0.000GB
+demo    0.000GB
+items   0.000GB
+local   0.000GB
+> show collections
+employees
+user
+users
+> db.user.drop()
+true
+> show collections
+employees
+users
+> db.users.find()
+{ "_id" : ObjectId("5e50ec5ad671c4e504b39725"), "name" : "mark" }
+> db.users.insert({'name':'mark'})
+WriteResult({ "nInserted" : 1 })
+> db.users.find()
+{ "_id" : ObjectId("5e50ec5ad671c4e504b39725"), "name" : "mark" }
+{ "_id" : ObjectId("5e50ef22d671c4e504b39727"), "name" : "mark" }
+> db.users.insert({'name':'mark','status':'d'})
+WriteResult({ "nInserted" : 1 })
+> db.users.insert({'name':'watson','status':'d'})
+WriteResult({ "nInserted" : 1 })
+> db.users.insert({'name':'modi','status':'g'})
+WriteResult({ "nInserted" : 1 })
+> db.users.find('status':'d')
+2020-02-22T01:09:53.026-0800 E  QUERY    [js] uncaught exception: SyntaxError: missing ) after argument list :
+@(shell):1:22
+> db.users.find({'status':'d'})
+{ "_id" : ObjectId("5e50efbad671c4e504b39728"), "name" : "mark", "status" : "d" }
+{ "_id" : ObjectId("5e50efc4d671c4e504b39729"), "name" : "watson", "status" : "d" }
+>
+> db.users.count()
+5
+> db.createCollection("users",{capped:true,size:1,max:2})
+{
+        "ok" : 0,
+        "errmsg" : "a collection 'demo.users' already exists",
+        "code" : 48,
+        "codeName" : "NamespaceExists"
+}
+
+> db.users.insertOne({'name':'mark'})
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("5e50f432d671c4e504b3972b")
+}
+> db.users.insertOne({'name':'tony'})
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("5e50f45ad671c4e504b3972c")
+}
+> show collections
+employees
+users
+> db.users.find()
+{ "_id" : ObjectId("5e50ec5ad671c4e504b39725"), "name" : "mark" }
+{ "_id" : ObjectId("5e50ef22d671c4e504b39727"), "name" : "mark" }
+{ "_id" : ObjectId("5e50efbad671c4e504b39728"), "name" : "mark", "status" : "d" }
+{ "_id" : ObjectId("5e50efc4d671c4e504b39729"), "name" : "watson", "status" : "d" }
+{ "_id" : ObjectId("5e50efd2d671c4e504b3972a"), "name" : "modi", "status" : "g" }
+{ "_id" : ObjectId("5e50f432d671c4e504b3972b"), "name" : "mark" }
+{ "_id" : ObjectId("5e50f45ad671c4e504b3972c"), "name" : "tony" }
+
+> db.users.save({"name":"z"})
+WriteResult({ "nInserted" : 1 })
+> db.users.insert(
+... {
+... "name":"jindal"
+... address:{
+... "H.no":"111",
+... "phoneNo":"9999999"
+... }
+... }
+... )
+2020-02-22T01:45:31.949-0800 E  QUERY    [js] uncaught exception: SyntaxError: missing } after property list :
+@(shell):4:0
+> db.users.insert( { "name":"jindal" "address":{ "H.no":"111", "phoneNo":"9999999" } } )
+2020-02-22T01:46:40.460-0800 E  QUERY    [js] uncaught exception: SyntaxError: missing } after property list :
+@(shell):1:35
+> db.users.insert( { "name":"jindal", "address":{ "H.no":"111", "phoneNo":"9999999" } } )
+WriteResult({ "nInserted" : 1 })
+> show users find()
+> db.users.find()
+{ "_id" : ObjectId("5e50ec5ad671c4e504b39725"), "name" : "mark" }
+{ "_id" : ObjectId("5e50ef22d671c4e504b39727"), "name" : "mark" }
+{ "_id" : ObjectId("5e50efbad671c4e504b39728"), "name" : "mark", "status" : "d" }
+{ "_id" : ObjectId("5e50efc4d671c4e504b39729"), "name" : "watson", "status" : "d" }
+{ "_id" : ObjectId("5e50efd2d671c4e504b3972a"), "name" : "modi", "status" : "g" }
+{ "_id" : ObjectId("5e50f432d671c4e504b3972b"), "name" : "mark" }
+{ "_id" : ObjectId("5e50f45ad671c4e504b3972c"), "name" : "tony" }
+{ "_id" : ObjectId("5e50f67bd671c4e504b3972d"), "name" : "z" }
+{ "_id" : ObjectId("5e50f892d671c4e504b3972e"), "name" : "jindal", "address" : { "H.no" : "111", "phoneNo" : "9999999" } }
+> db.users.insert(
+... {
+... "name":"jindal"
+... address:{
+... "H.no":"111",
+... "phoneNo":"9999999"
+... }
+... }
+... db.users.insert( { "name":"jindal" "address":{ "H.no":"111", "phoneNo":"9999999","country":"usa" } } )
+...
+...
+>
+> db.users.insert( { "name":"jindal", "address":{ "H.no":"111", "phoneNo":"9999999","country":"usa" } } )
+WriteResult({ "nInserted" : 1 })
+> db.users.insert( { "name":"jindal", "address":{ "H.no":"111", "phoneNo":"9999999","country":"india" } } )
+WriteResult({ "nInserted" : 1 })
+> db.users.insert( { "name":"jindal", "address":{ "H.no":"111", "phoneNo":"9999999","country":"china" } } )
+WriteResult({ "nInserted" : 1 })
+> db.users.insert( { "name":"jindal", "address":{ "H.no":"111", "phoneNo":"9999999","country":"russia } } )
+2020-02-22T01:50:32.338-0800 E  QUERY    [js] uncaught exception: SyntaxError: "" literal not terminated before end of script :
+@(shell):1:105
+> db.users.insert( { "name":"jindal", "address":{ "H.no":"111", "phoneNo":"9999999","country":"russia" } } )
+WriteResult({ "nInserted" : 1 })
+> db.users.finf()
+2020-02-22T01:51:14.762-0800 E  QUERY    [js] uncaught exception: TypeError: db.users.finf is not a function :
+@(shell):1:1
+> db.users.find()
+{ "_id" : ObjectId("5e50ec5ad671c4e504b39725"), "name" : "mark" }
+{ "_id" : ObjectId("5e50ef22d671c4e504b39727"), "name" : "mark" }
+{ "_id" : ObjectId("5e50efbad671c4e504b39728"), "name" : "mark", "status" : "d" }
+{ "_id" : ObjectId("5e50efc4d671c4e504b39729"), "name" : "watson", "status" : "d" }
+{ "_id" : ObjectId("5e50efd2d671c4e504b3972a"), "name" : "modi", "status" : "g" }
+{ "_id" : ObjectId("5e50f432d671c4e504b3972b"), "name" : "mark" }
+{ "_id" : ObjectId("5e50f45ad671c4e504b3972c"), "name" : "tony" }
+{ "_id" : ObjectId("5e50f67bd671c4e504b3972d"), "name" : "z" }
+{ "_id" : ObjectId("5e50f892d671c4e504b3972e"), "name" : "jindal", "address" : { "H.no" : "111", "phoneNo" : "9999999" } }
+{ "_id" : ObjectId("5e50f950d671c4e504b3972f"), "name" : "jindal", "address" : { "H.no" : "111", "phoneNo" : "9999999", "country" : "usa" } }
+{ "_id" : ObjectId("5e50f958d671c4e504b39730"), "name" : "jindal", "address" : { "H.no" : "111", "phoneNo" : "9999999", "country" : "india" } }
+{ "_id" : ObjectId("5e50f960d671c4e504b39731"), "name" : "jindal", "address" : { "H.no" : "111", "phoneNo" : "9999999", "country" : "china" } }
+{ "_id" : ObjectId("5e50f96cd671c4e504b39732"), "name" : "jindal", "address" : { "H.no" : "111", "phoneNo" : "9999999", "country" : "russia" } }
+> db.users.find({"name":"jindal","country":"india"})
+> db.users.findBy({"country":"india"})
+2020-02-22T01:56:50.206-0800 E  QUERY    [js] uncaught exception: TypeError: db.users.findBy is not a function :
+@(shell):1:1
+> db.users.find({"address.country"="india"})
+2020-02-22T01:58:19.725-0800 E  QUERY    [js] uncaught exception: SyntaxError: missing : after property id :
+@(shell):1:32
+> db.users.find({"address.country":"india"})
+{ "_id" : ObjectId("5e50f958d671c4e504b39730"), "name" : "jindal", "address" : { "H.no" : "111", "phoneNo" : "9999999", "country" : "india" } }
+> db.users.find({"address.country":"india"}).pretty()
+{
+        "_id" : ObjectId("5e50f958d671c4e504b39730"),
+        "name" : "jindal",
+        "address" : {
+                "H.no" : "111",
+                "phoneNo" : "9999999",
+                "country" : "india"
+        }
+}
+
+> db.users.find({name:'jindal',"address.country":"india"})
+{ "_id" : ObjectId("5e50f958d671c4e504b39730"), "name" : "jindal", "address" : { "H.no" : "111", "phoneNo" : "9999999", "country" : "india" } }
+> db.users.find({name:'jindal',"address.country":"india"})
+{ "_id" : ObjectId("5e50f958d671c4e504b39730"), "name" : "jindal", "address" : { "H.no" : "111", "phoneNo" : "9999999", "country" : "india" } }
+> db.users.find({$or:[{"name":'jindal',"address.country":"india"}]})
+{ "_id" : ObjectId("5e50f958d671c4e504b39730"), "name" : "jindal", "address" : { "H.no" : "111", "phoneNo" : "9999999", "country" : "india" } }
+> db.users.insert( { "name":"gupta", "address":{ "H.no":"111", "phoneNo":"9999999","country":"russia" } } )
+WriteResult({ "nInserted" : 1 })
+> db.users.insert( { "name":"manish", "address":{ "H.no":"111", "phoneNo":"9999999","country":"russia" } } )
+WriteResult({ "nInserted" : 1 })
+> db.users.find({$or:[{name:'manish',"address.country":"india"})})
+2020-02-22T02:12:43.885-0800 E  QUERY    [js] uncaught exception: SyntaxError: missing ] after element list :
+@(shell):1:61
+> db.users.find({$or:[{"name":'manish',"address.country":"india"})})
+2020-02-22T02:13:09.844-0800 E  QUERY    [js] uncaught exception: SyntaxError: missing ] after element list :
+@(shell):1:63
+> db.users.find({$or:[{"name":"manish","address.country":"india"})})
+2020-02-22T02:13:25.772-0800 E  QUERY    [js] uncaught exception: SyntaxError: missing ] after element list :
+@(shell):1:63
+> db.users.find({$or:[{"name":"manish","address.country":"india"})})
+2020-02-22T02:14:07.580-0800 E  QUERY    [js] uncaught exception: SyntaxError: missing ] after element list :
+@(shell):1:63
+
+> db.users.find({$or:[{"name":"manish","address.country":"russia"})})
+2020-02-22T02:14:42.587-0800 E  QUERY    [js] uncaught exception: SyntaxError: missing ] after element list :
+@(shell):1:64
+> db.users.find({$or:[{"name":"manish"},{"address.country":"russia"}]})
+{ "_id" : ObjectId("5e50f96cd671c4e504b39732"), "name" : "jindal", "address" : { "H.no" : "111", "phoneNo" : "9999999", "country" : "russia" } }
+{ "_id" : ObjectId("5e50fe3dd671c4e504b39733"), "name" : "gupta", "address" : { "H.no" : "111", "phoneNo" : "9999999", "country" : "russia" } }
+{ "_id" : ObjectId("5e50fe4bd671c4e504b39734"), "name" : "manish", "address" : { "H.no" : "111", "phoneNo" : "9999999", "country" : "russia" } }
+
+> db.users.updateOne({"name":"manish"},{$set:{"address.country":"paris"}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.users.updateOne({"name":"manish"},{$set:{"address.country":"paris"}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 0 }
+>
