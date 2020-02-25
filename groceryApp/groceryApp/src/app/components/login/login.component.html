@@ -1,0 +1,55 @@
+<form [formGroup]="userForm">
+  <h1>LogIn(it is an example of reactive form)</h1>
+
+{{userForm.value|json}}
+
+<div class="form-group">
+  <label for="">Name:</label>
+  <input type="text" formControlName="Name" class="form-control"
+  [class.is-invalid]="userForm.get('Name').invalid && userForm.get('Name').touched" />
+ <div *ngIf= "userForm.get('Name').invalid && userForm.get('Name').touched">
+<small class="text-danger" *ngIf="userForm.get('Name').errors.required" >This is required filed</small>
+<small class="text-danger" *ngIf="userForm.get('Name').errors.minlength" >This is required filed</small>
+<small class="text-danger" *ngIf="userForm.get('Name').errors.maxlength" >This is required filed</small>
+ </div>
+</div>
+
+<div class="form-group">
+  <label for="">Email:</label>
+  <input type="text"  formControlName="Email"class="form-control" 
+  []class.is-invalid="userForm.get('Email').invalid && userForm.get('Email').touched" />
+  <!-- <div *ngIf="userForm.get('Email').invalid && userForm.get('Email').touched ">
+    <small class="text-danger" *ngIf="userForm.get('Email').errors.required" >This is required filed</small>
+    <small class="text-danger" *ngIf="userForm.get('Email').errors.minlength" >This is required filed</small>
+    <small class="text-danger" *ngIf="userForm.get('Email').errors.maxlength" >This is required filed</small>
+
+  </div> -->
+</div>
+<div class="form-group">
+  <label for="">Password:</label>
+  <input type="text" formControlName="Password" class="form-control"
+  [class.is-invalid="userForm.get('Password').invalid && userForm.get('Password').touched"] />
+   <div *ngIf="userForm.get('Email').invalid && userForm.get('Email').touched ">
+    <small class="text-danger" *ngIf="userForm.get('Password').errors.required" >This is required filed</small>
+    <small class="text-danger" *ngIf="userForm.get('Password').errors.minlength" >This is required filed</small>
+    <small class="text-danger" *ngIf="userForm.get('Password').errors.maxlength" >This is required filed</small>
+
+  </div> 
+  <div formGroupName="address">
+
+    <div class="form-group">
+    <label for="">House No:</label>
+   <input type="text" formControlName="house" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="">City:</label>
+       <input type="text" formControlName="City" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="">Country:</label>
+           <input type="text" formControlName="Country" class="form-control">
+            </div>
+
+  </div>
+</div>
+</form>
